@@ -5,6 +5,7 @@ import { GoPlus } from "react-icons/go";
 import { motion } from "framer-motion";
 import DisplayImage from '../Images/display.gif'
 import DisplayImageX from '../Images/imagex.gif'
+import swal from 'sweetalert';
 
 import '../css/main.css'
 const mapStateToProps = (state) => {
@@ -28,7 +29,15 @@ const Todos = (props) => {
 
   const add = () => {
     if (todo === "") {
-      alert("Input is Empty");
+
+      swal({
+        title: "Wait !!!",
+        text: "You cannot have Empty Task",
+        icon: "warning",
+        button: "Click Here",
+        timer:3000,
+      });
+
     } else {
       props.addTodo({
         id: Math.floor(Math.random() * 1000),

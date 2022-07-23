@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import React, { useRef } from "react";
 import { AiFillEdit } from "react-icons/ai";
 import { IoCheckmarkDoneSharp, IoClose } from "react-icons/io5";
+import swal from 'sweetalert';
 
 const TodoItem = (props) => {
   const { item, updateTodo, removeTodo, completeTodo } = props;
@@ -20,6 +21,19 @@ const TodoItem = (props) => {
       inputRef.current.disabled = true;
     }
   };
+
+  const removeEdited = (item)=>{
+    swal({
+      title: "Keep Performing Tasks",
+      text: "Deletion Successfully Completed",
+      icon: "success",
+      button: "Click Here",
+      timer:3000,
+    }).then(()=>{
+      removeTodo(item.id)
+    });
+  };
+
   return (
     <motion.li
       initial={{ x: "150vw", transition: { type: "spring", duration: 2 } }}
@@ -66,7 +80,7 @@ const TodoItem = (props) => {
           whileHover={{ scale: 1.4 }}
           whileTap={{ scale: 0.9 }}
           style={{ color: "red" }}
-          onClick={() => removeTodo(item.id)}
+          onClick={() => removeEdited(item)}
         >
           {" "}
           <IoClose />
